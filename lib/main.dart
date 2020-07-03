@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_shopping_platform/pages/index_page.dart';
 
-main() => runApp(MyApp());
+main() => {runApp(MyApp())};
 
 class MyApp extends StatelessWidget {
   @override
