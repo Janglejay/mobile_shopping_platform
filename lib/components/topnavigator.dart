@@ -13,6 +13,7 @@ class TopNavigator extends StatelessWidget {
         print("点击了导航");
       },
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Image.network(
             "https://${item.image_url}",
@@ -27,15 +28,14 @@ class TopNavigator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: ScreenUtil().setHeight(330),
-      padding: EdgeInsets.only(top: 10.0, left: 5.0),
+      height: ScreenUtil().setHeight(355),
+      padding: EdgeInsets.only(top: 5.0, left: 5.0, right: 5.0),
       child: GridView.count(
-        crossAxisCount: 5,
-        padding: EdgeInsets.all(5.0),
-        children: navigatorList.map((e) {
-          return _gridViewItem(context, e);
-        }).toList(),
-      ),
+          crossAxisCount: 5,
+          padding: EdgeInsets.only(top: 5.0, left: 5.0, right: 5.0),
+          children: navigatorList.map((e) {
+            return _gridViewItem(context, e);
+          }).toList()),
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:mobile_shopping_platform/components/banner.dart';
 import 'package:mobile_shopping_platform/components/swiperdiy.dart';
 import 'package:mobile_shopping_platform/components/topnavigator.dart';
 import 'package:mobile_shopping_platform/config/service_url.dart';
@@ -17,11 +18,16 @@ class HomePage extends StatelessWidget {
           List swiper = images.imageList;
           var icons = ImageList.fromJson(snapshot.data['icons']);
           List topNavigtors = icons.imageList;
+          var banner = ImageList.fromJson(snapshot.data['banner']);
+          List<SingleImage> bannerImages = banner.imageList;
           return Column(
             children: <Widget>[
               SwiperDiy(swiperDataList: swiper),
               TopNavigator(
                 navigatorList: topNavigtors,
+              ),
+              MyBanner(
+                singleImage: bannerImages[0],
               ),
             ],
           );
@@ -39,7 +45,7 @@ class HomePage extends StatelessWidget {
       Response response;
       Dio dio = new Dio();
       response = await dio.get(getImfomations);
-      print(response.data);
+      // print(response.data);
       return response.data;
     } catch (e) {
       return print(e);
