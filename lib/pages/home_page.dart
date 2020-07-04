@@ -8,7 +8,13 @@ import 'package:mobile_shopping_platform/config/service_url.dart';
 import 'package:mobile_shopping_platform/convert/image_imformation_convert.dart';
 import 'package:mobile_shopping_platform/convert/recommend_goods_convert.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage>
+    with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,4 +66,7 @@ class HomePage extends StatelessWidget {
       return print(e);
     }
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
