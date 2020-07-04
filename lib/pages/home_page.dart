@@ -1,10 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_shopping_platform/components/banner.dart';
+import 'package:mobile_shopping_platform/components/recommend.dart';
 import 'package:mobile_shopping_platform/components/swiperdiy.dart';
 import 'package:mobile_shopping_platform/components/topnavigator.dart';
 import 'package:mobile_shopping_platform/config/service_url.dart';
 import 'package:mobile_shopping_platform/convert/image_imformation_convert.dart';
+import 'package:mobile_shopping_platform/convert/recommend_goods_convert.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -20,16 +22,24 @@ class HomePage extends StatelessWidget {
           List topNavigtors = icons.imageList;
           var banner = ImageList.fromJson(snapshot.data['banner']);
           List<SingleImage> bannerImages = banner.imageList;
-          return Column(
-            children: <Widget>[
-              SwiperDiy(swiperDataList: swiper),
-              TopNavigator(
-                navigatorList: topNavigtors,
-              ),
-              MyBanner(
-                singleImage: bannerImages[0],
-              ),
-            ],
+          var recommendedList =
+              RecommendGoodsList.fromJson(snapshot.data['recommendedGoods']);
+          List<RecommendGoods> recommendedGoods = recommendedList.recommendList;
+          return SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
+                SwiperDiy(swiperDataList: swiper),
+                TopNavigator(
+                  navigatorList: topNavigtors,
+                ),
+                MyBanner(
+                  singleImage: bannerImages[0],
+                ),
+                Recommend(
+                  recommendList: recommendedGoods,
+                ),
+              ],
+            ),
           );
         } else {
           return Center(
@@ -45,7 +55,6 @@ class HomePage extends StatelessWidget {
       Response response;
       Dio dio = new Dio();
       response = await dio.get(getImfomations);
-      // print(response.data);
       return response.data;
     } catch (e) {
       return print(e);
