@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:mobile_shopping_platform/components/swiperdiy.dart';
+import 'package:mobile_shopping_platform/components/topnavigator.dart';
 import 'package:mobile_shopping_platform/config/service_url.dart';
 import 'package:mobile_shopping_platform/convert/image_imformation_convert.dart';
 
@@ -12,11 +13,16 @@ class HomePage extends StatelessWidget {
       future: _getHomePage(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          var list = ImageList.fromJson(snapshot.data['images']);
-          List swiper = list.imageList;
+          var images = ImageList.fromJson(snapshot.data['images']);
+          List swiper = images.imageList;
+          var icons = ImageList.fromJson(snapshot.data['icons']);
+          List topNavigtors = icons.imageList;
           return Column(
             children: <Widget>[
               SwiperDiy(swiperDataList: swiper),
+              TopNavigator(
+                navigatorList: topNavigtors,
+              ),
             ],
           );
         } else {
@@ -33,33 +39,10 @@ class HomePage extends StatelessWidget {
       Response response;
       Dio dio = new Dio();
       response = await dio.get(getImfomations);
+      print(response.data);
       return response.data;
     } catch (e) {
       return print(e);
     }
-  }
-}
-
-//首页轮播组件
-class SwiperDiy extends StatelessWidget {
-  final List<SingleImage> swiperDataList;
-  SwiperDiy({this.swiperDataList});
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 333,
-      child: Swiper(
-        //轮播图数量
-        itemCount: swiperDataList.length,
-        //轮播的图片
-        itemBuilder: (context, int index) {
-          return Image.network("${swiperDataList[index].image_url}");
-        },
-        //是否有那个可选圆点
-        pagination: new SwiperPagination(),
-        //自动播放
-        autoplay: true,
-      ),
-    );
   }
 }
