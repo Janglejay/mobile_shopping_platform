@@ -1,3 +1,4 @@
-const _homePageUrl = "http://192.168.1.103:8000/homepage";
+const _homePageUrl = "http://192.168.1.104:8000/homepage";
 
-const getImfomations = _homePageUrl + "/information";
+const GETINFORMATHION = _homePageUrl + "/information";
+const GETHOTGOODS = _homePageUrl + "/hotgoods";

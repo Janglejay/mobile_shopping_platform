@@ -1,11 +1,16 @@
 import 'package:dio/dio.dart';
-import 'package:mobile_shopping_platform/config/service_url.dart';
 
-Future getHomePage() async {
+Future getRequest(url, {Map args}) async {
   try {
     Response response;
     Dio dio = new Dio();
-    response = await dio.get(getImfomations);
+    print(url);
+    if (args == null) {
+      response = await dio.get(url);
+    } else {
+      response = await dio.get(url, queryParameters: args);
+    }
+    print(response.data);
     return response.data;
   } catch (e) {
     return print(e);
