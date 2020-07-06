@@ -23,14 +23,16 @@ class BrandProvide with ChangeNotifier {
       all.categoryId = list[0].categoryId;
     }
     _brandsList = [all];
-    _brandsList.addAll(list);
+    if (list.length != 0) _brandsList.addAll(list);
     notifyListeners();
   }
 
   get clickIndex => _clickIndex;
   set clickIndex(int cur) {
+    print("=================${cur}");
     if (cur != _clickIndex) {
       _page = 1;
+      print("=================changepage->${_page}");
     }
     _clickIndex = cur;
     notifyListeners();
@@ -39,6 +41,7 @@ class BrandProvide with ChangeNotifier {
   get page => _page;
   set page(int cpage) {
     //不需要刷新组件，所以不通知
-    _page++;
+    _page = cpage;
+    notifyListeners();
   }
 }
