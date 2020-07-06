@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_shopping_platform/components/category/goods_list.dart';
 import 'package:mobile_shopping_platform/components/category/left_Category_nav.dart';
 import 'package:mobile_shopping_platform/components/category/right_category.dart';
 
@@ -26,6 +27,7 @@ class _CateGoryPageState extends State<CateGoryPage> {
             Column(
               children: <Widget>[
                 RightCategory(),
+                GoodsList(),
               ],
             )
           ],

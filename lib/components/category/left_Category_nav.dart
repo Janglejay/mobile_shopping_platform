@@ -79,10 +79,8 @@ class _LeftCategoryNavState extends State<LeftCategoryNav> {
 
   Future _getBrandsList(int id) async {
     Map params = {"categoryId": id};
-    print(params);
     await postRequest(GETBRANDS, data: params).then((value) {
       var data = Brand.fromJson(value);
-      print(data.brands);
       //listen:false 当前组件不会重绘
       BrandProvide bp = Provider.of<BrandProvide>(context, listen: false);
       bp.brandsList = data.brands;

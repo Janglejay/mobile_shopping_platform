@@ -1,9 +1,9 @@
-class GoodsList {
+class GoodsListModel {
   List<Goods> goods;
 
-  GoodsList({this.goods});
+  GoodsListModel({this.goods});
 
-  GoodsList.fromJson(Map<String, dynamic> json) {
+  GoodsListModel.fromJson(Map<String, dynamic> json) {
     if (json['goods'] != null) {
       goods = new List<Goods>();
       json['goods'].forEach((v) {
@@ -28,8 +28,8 @@ class Goods {
   String description;
   String name;
   String imageUrl;
-  int mallPrice;
-  int price;
+  double mallPrice;
+  double price;
 
   Goods(
       {this.goodsId,

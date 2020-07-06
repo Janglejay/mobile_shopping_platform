@@ -26,8 +26,6 @@ Future postRequest(String url, {Map data}) async {
       //post用data
       response = await dio.post(url, data: data);
     }
-    print("================================================");
-    print(response.data);
     return response.data;
   } catch (e) {
     print(e);

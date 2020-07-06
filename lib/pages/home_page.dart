@@ -45,7 +45,6 @@ class _HomePageState extends State<HomePage>
               List<RecommendGoods> recommendedGoods =
                   recommendedList.recommendList;
               var floorTitle1 = SingleImage.fromJson(snapshot.data['ft1']);
-              print(floorTitle1.image_url);
               var floorTitle2 = SingleImage.fromJson(snapshot.data['ft2']);
               var fg1 = ImageList.fromJson(snapshot.data['fc1']);
               var fg2 = ImageList.fromJson(snapshot.data['fc2']);
