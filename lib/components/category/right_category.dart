@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mobile_shopping_platform/convert/brand_model.dart';
+import 'package:mobile_shopping_platform/provide/brand_provide.dart';
+import 'package:provider/provider.dart';
 
 class RightCategory extends StatefulWidget {
   RightCategory({Key key}) : super(key: key);
@@ -9,18 +12,10 @@ class RightCategory extends StatefulWidget {
 }
 
 class _RightCategoryState extends State<RightCategory> {
-  List list = [
-    '1ssss',
-    '2ssss',
-    '3ssss',
-    '4ssss',
-    '5ssss',
-    '6ssss',
-    '7ssss',
-    '8sssss'
-  ];
   @override
   Widget build(BuildContext context) {
+    BrandProvide bp = Provider.of<BrandProvide>(context);
+    List<Brands> brandsList = bp.brandsList;
     return Container(
       height: ScreenUtil().setHeight(100),
       width: ScreenUtil().setWidth(570),
@@ -29,21 +24,21 @@ class _RightCategoryState extends State<RightCategory> {
           border: Border(bottom: BorderSide(width: 1, color: Colors.black12))),
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        itemCount: list.length,
+        itemCount: brandsList.length,
         itemBuilder: (context, index) {
-          return _rightInkWell(list[index]);
+          return _rightInkWell(brandsList[index]);
         },
       ),
     );
   }
 
-  Widget _rightInkWell(String item) {
+  Widget _rightInkWell(Brands item) {
     return InkWell(
       onTap: () {},
       child: Container(
         padding: EdgeInsets.fromLTRB(15.0, 15.0, 15.0, 10.0),
         child: Text(
-          item,
+          item.brandName,
           style: TextStyle(fontSize: ScreenUtil().setSp(28)),
         ),
       ),

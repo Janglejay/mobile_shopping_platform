@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mobile_shopping_platform/pages/index_page.dart';
+import 'package:mobile_shopping_platform/provide/brand_provide.dart';
+import 'package:provider/provider.dart';
 
 main() => runApp(MyApp());
 
@@ -14,11 +16,16 @@ class MyApp extends StatelessWidget {
     // print("像素密度:${ScreenUtil.screenWidth}");
 
     return Container(
-      child: MaterialApp(
-        title: "ForU Shop",
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(primaryColor: Colors.red[600]),
-        home: IndexPage(),
+      child: MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (context) => BrandProvide()),
+        ],
+        child: MaterialApp(
+          title: "ForU Shop",
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(primaryColor: Colors.red[600]),
+          home: IndexPage(),
+        ),
       ),
     );
   }

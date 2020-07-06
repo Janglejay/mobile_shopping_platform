@@ -7,6 +7,7 @@ Future getRequest(url, {Map args}) async {
     if (args == null) {
       response = await dio.get(url);
     } else {
+      //get用queryParameters
       response = await dio.get(url, queryParameters: args);
     }
     return response.data;
@@ -22,8 +23,11 @@ Future postRequest(String url, {Map data}) async {
     if (data == null) {
       response = await dio.post(url);
     } else {
-      response = await dio.post(url, queryParameters: data);
+      //post用data
+      response = await dio.post(url, data: data);
     }
+    print("================================================");
+    print(response.data);
     return response.data;
   } catch (e) {
     print(e);
