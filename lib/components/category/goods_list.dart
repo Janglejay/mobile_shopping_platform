@@ -18,14 +18,17 @@ class _GoodsListState extends State<GoodsList> {
   @override
   Widget build(BuildContext context) {
     return Consumer<GoodsListProvide>(builder: (context, gp, child) {
-      return Container(
-        width: ScreenUtil().setWidth(570),
-        height: ScreenUtil().setHeight(960),
-        child: ListView.builder(
-            itemCount: gp.goodsList.length,
-            itemBuilder: (context, index) {
-              return _myListItem(index, gp.goodsList);
-            }),
+      //利用Expanded高度溢出bug
+      return Expanded(
+        child: Container(
+          width: ScreenUtil().setWidth(570),
+          // height: ScreenUtil().setHeight(1000),
+          child: ListView.builder(
+              itemCount: gp.goodsList.length,
+              itemBuilder: (context, index) {
+                return _myListItem(index, gp.goodsList);
+              }),
+        ),
       );
     });
   }

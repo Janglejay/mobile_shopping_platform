@@ -26,21 +26,28 @@ class _RightCategoryState extends State<RightCategory> {
         scrollDirection: Axis.horizontal,
         itemCount: brandsList.length,
         itemBuilder: (context, index) {
-          return _rightInkWell(brandsList[index]);
+          return _rightInkWell(brandsList[index], index);
         },
       ),
     );
   }
 
-  Widget _rightInkWell(Brands item) {
+  Widget _rightInkWell(Brands item, int clickIndex) {
+    BrandProvide bp = Provider.of<BrandProvide>(context);
+    bool isClick = clickIndex == bp.clickIndex;
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        BrandProvide bp = Provider.of<BrandProvide>(context, listen: false);
+        bp.clickIndex = clickIndex;
+      },
       child: Container(
         alignment: Alignment(0, 0),
         padding: EdgeInsets.fromLTRB(15.0, 15.0, 15.0, 10.0),
         child: Text(
           item.brandName,
-          style: TextStyle(fontSize: ScreenUtil().setSp(28)),
+          style: TextStyle(
+              fontSize: ScreenUtil().setSp(28),
+              color: isClick ? Colors.red[600] : null),
         ),
       ),
     );
