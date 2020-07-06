@@ -16,6 +16,8 @@ class LeftCategoryNav extends StatefulWidget {
 
 class _LeftCategoryNavState extends State<LeftCategoryNav> {
   List<Categories> list = [];
+  //选中的索引
+  int clickIndex = 0;
   @override
   void initState() {
     super.initState();
@@ -39,15 +41,20 @@ class _LeftCategoryNavState extends State<LeftCategoryNav> {
   }
 
   Widget _leftInkWell(int index) {
+    bool isClick = false;
+    isClick = index == clickIndex ? true : false;
     return InkWell(
       onTap: () {
+        setState(() {
+          clickIndex = index;
+        });
         _getBrandsList(list[index].categoryId);
       },
       child: Container(
         height: ScreenUtil().setHeight(150),
         padding: EdgeInsets.only(left: 10, top: 20),
         decoration: BoxDecoration(
-            color: Colors.white12,
+            color: isClick ? Colors.black12 : Colors.white12,
             border:
                 Border(bottom: BorderSide(width: 1, color: Colors.black12))),
         child: Text(
@@ -64,6 +71,8 @@ class _LeftCategoryNavState extends State<LeftCategoryNav> {
       setState(() {
         list = data.categories;
       });
+      //第一次进入的时候将默认的第一分类的品牌显示出来
+      _getBrandsList(data.categories[0].categoryId);
       return data;
     });
   }

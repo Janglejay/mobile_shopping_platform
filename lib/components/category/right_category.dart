@@ -36,6 +36,7 @@ class _RightCategoryState extends State<RightCategory> {
     return InkWell(
       onTap: () {},
       child: Container(
+        alignment: Alignment(0, 0),
         padding: EdgeInsets.fromLTRB(15.0, 15.0, 15.0, 10.0),
         child: Text(
           item.brandName,
