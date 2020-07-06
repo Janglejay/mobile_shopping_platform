@@ -42,13 +42,9 @@ class _RightCategoryState extends State<RightCategory> {
     return InkWell(
       onTap: () {
         _click(clickIndex);
-        print(clickIndex);
         if (clickIndex != 0) {
           _getGoodsList(item.categoryId, item.brandId, bp.page);
-          bp.page++;
         } else {
-          print("==================${item}");
-          print("==================${item.categoryId}");
           _getAllGoods(item.categoryId);
         }
       },

@@ -18,6 +18,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage>
     with AutomaticKeepAliveClientMixin {
+  EasyRefreshController _controller = EasyRefreshController();
   int page = 1;
   List<SingleImage> hotGoodsList = [];
 
@@ -51,6 +52,8 @@ class _HomePageState extends State<HomePage>
               List<SingleImage> floorGoodsList1 = fg1.imageList;
               List<SingleImage> floorGoodsList2 = fg2.imageList;
               return EasyRefresh(
+                controller: _controller,
+                enableControlFinishLoad: true,
                 child: ListView(
                   children: <Widget>[
                     SwiperDiy(swiperDataList: swiper),
@@ -79,6 +82,7 @@ class _HomePageState extends State<HomePage>
                 ),
                 onLoad: () async {
                   var data = {"page": page};
+                  print("=================${page}");
                   await getRequest(GETHOTGOODS, args: data).then((value) {
                     var data = value['hotgoods'];
                     ImageList imageList = ImageList.fromJson(data);
@@ -88,6 +92,7 @@ class _HomePageState extends State<HomePage>
                       page++;
                     });
                   });
+                  _controller.finishLoad(success: true, noMore: page >= 3);
                 },
               );
             } else {

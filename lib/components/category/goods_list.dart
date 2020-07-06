@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mobile_shopping_platform/config/service_url.dart';
 import 'package:mobile_shopping_platform/convert/goods_model.dart';
+import 'package:mobile_shopping_platform/provide/brand_provide.dart';
 import 'package:mobile_shopping_platform/provide/goods_list_provide.dart';
+import 'package:mobile_shopping_platform/service/http_service.dart';
 import 'package:provider/provider.dart';
 
 class GoodsList extends StatefulWidget {
@@ -10,6 +14,7 @@ class GoodsList extends StatefulWidget {
 }
 
 class _GoodsListState extends State<GoodsList> {
+  EasyRefreshController _controller = EasyRefreshController();
   @override
   void initState() {
     super.initState();
@@ -17,19 +22,44 @@ class _GoodsListState extends State<GoodsList> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<GoodsListProvide>(builder: (context, gp, child) {
+    return Consumer2<GoodsListProvide, BrandProvide>(
+        builder: (context, gp, bp, child) {
       //利用Expanded高度溢出bug
-      return Expanded(
-        child: Container(
-          width: ScreenUtil().setWidth(570),
-          // height: ScreenUtil().setHeight(1000),
-          child: ListView.builder(
-              itemCount: gp.goodsList.length,
-              itemBuilder: (context, index) {
-                return _myListItem(index, gp.goodsList);
-              }),
-        ),
-      );
+      if (gp.goodsList.length == 0) {
+        return Text("暂时没有数据");
+      } else
+        return Expanded(
+          child: Container(
+              width: ScreenUtil().setWidth(570),
+              // height: ScreenUtil().setHeight(1000),
+              child: EasyRefresh(
+                  controller: _controller,
+                  enableControlFinishLoad: true,
+                  // firstRefresh: true,
+                  child: ListView.builder(
+                      itemCount: gp.goodsList.length,
+                      itemBuilder: (context, index) {
+                        return _myListItem(index, gp.goodsList);
+                      }),
+                  onLoad: () async {
+                    var cid = bp.brandsList[bp.clickIndex].categoryId;
+                    var bid = bp.brandsList[bp.clickIndex].brandId;
+                    var page = bp.page;
+                    print("page==============${page}");
+                    Map params = {
+                      "categoryId": cid,
+                      "brandId": bid,
+                      "page": page
+                    };
+                    await postRequest(GETBANDGOODS, data: params).then((value) {
+                      var goodsList = GoodsListModel.fromJson(value);
+                      List<Goods> list = goodsList.goods;
+                      gp.goodsList.addAll(list);
+                      bp.page++;
+                      _controller.finishLoad(noMore: list.length == 0);
+                    });
+                  })),
+        );
     });
   }
 
