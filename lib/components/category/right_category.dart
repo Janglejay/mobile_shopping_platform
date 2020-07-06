@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mobile_shopping_platform/config/service_url.dart';
 import 'package:mobile_shopping_platform/convert/brand_model.dart';
+import 'package:mobile_shopping_platform/convert/goods_model.dart';
 import 'package:mobile_shopping_platform/provide/brand_provide.dart';
+import 'package:mobile_shopping_platform/provide/goods_list_provide.dart';
+import 'package:mobile_shopping_platform/service/http_service.dart';
 import 'package:provider/provider.dart';
 
 class RightCategory extends StatefulWidget {
@@ -37,8 +41,16 @@ class _RightCategoryState extends State<RightCategory> {
     bool isClick = clickIndex == bp.clickIndex;
     return InkWell(
       onTap: () {
-        BrandProvide bp = Provider.of<BrandProvide>(context, listen: false);
-        bp.clickIndex = clickIndex;
+        _click(clickIndex);
+        print(clickIndex);
+        if (clickIndex != 0) {
+          _getGoodsList(item.categoryId, item.brandId, bp.page);
+          bp.page++;
+        } else {
+          print("==================${item}");
+          print("==================${item.categoryId}");
+          _getAllGoods(item.categoryId);
+        }
       },
       child: Container(
         alignment: Alignment(0, 0),
@@ -51,5 +63,33 @@ class _RightCategoryState extends State<RightCategory> {
         ),
       ),
     );
+  }
+
+  // 通过点击品牌获得的
+  _getGoodsList(int categoryId, int brandId, int page) async {
+    var params = {"categoryId": categoryId, "brandId": brandId, "page": page};
+    await postRequest(GETBANDGOODS, data: params).then((value) {
+      var goodModel = GoodsListModel.fromJson(value);
+      var list = goodModel.goods;
+      GoodsListProvide gp =
+          Provider.of<GoodsListProvide>(context, listen: false);
+      gp.goodsList = list;
+    });
+  }
+
+  _getAllGoods(int categoryId) async {
+    var params = {"categoryId": categoryId};
+    await postRequest(GETALLGOODS, data: params).then((value) {
+      var goodModel = GoodsListModel.fromJson(value);
+      var list = goodModel.goods;
+      GoodsListProvide gp =
+          Provider.of<GoodsListProvide>(context, listen: false);
+      gp.goodsList = list;
+    });
+  }
+
+  _click(int clickIndex) {
+    BrandProvide bp = Provider.of<BrandProvide>(context, listen: false);
+    bp.clickIndex = clickIndex;
   }
 }

@@ -103,15 +103,4 @@ class _LeftCategoryNavState extends State<LeftCategoryNav> {
       gp.goodsList = list;
     });
   }
-
-//通过点击品牌获得的
-  // _getGoodsList(int categoryId, int brandId, int page) async {
-  //   var params = {"categoryId": categoryId, "brandId": brandId, "page": page};
-  //   await postRequest(GETBANDGOODS, data: params).then((value) {
-  //     var goodModel = GoodsListModel.fromJson(value);
-  //     var list = goodModel.goods;
-  //     GoodsListProvide gp = Provider.of<GoodsListProvide>(context);
-  //     gp.goodsList = list;
-  //   });
-  // }
 }
