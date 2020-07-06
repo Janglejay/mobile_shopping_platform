@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
-import 'package:mobile_shopping_platform/components/FloorComponent.dart';
-import 'package:mobile_shopping_platform/components/banner.dart';
-import 'package:mobile_shopping_platform/components/hotgoods.dart';
-import 'package:mobile_shopping_platform/components/recommend.dart';
-import 'package:mobile_shopping_platform/components/swiperdiy.dart';
-import 'package:mobile_shopping_platform/components/topnavigator.dart';
+import 'package:mobile_shopping_platform/components/homepage/FloorComponent.dart';
+import 'package:mobile_shopping_platform/components/homepage/banner.dart';
+import 'package:mobile_shopping_platform/components/homepage/hotgoods.dart';
+import 'package:mobile_shopping_platform/components/homepage/recommend.dart';
+import 'package:mobile_shopping_platform/components/homepage/swiperdiy.dart';
+import 'package:mobile_shopping_platform/components/homepage/topnavigator.dart';
 import 'package:mobile_shopping_platform/config/service_url.dart';
 import 'package:mobile_shopping_platform/convert/image_imformation_convert.dart';
 import 'package:mobile_shopping_platform/convert/recommend_goods_convert.dart';
-import 'package:mobile_shopping_platform/service/homepage_service.dart';
+import 'package:mobile_shopping_platform/service/http_service.dart';
 
 class HomePage extends StatefulWidget {
   @override

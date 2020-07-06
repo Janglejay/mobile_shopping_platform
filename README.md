@@ -42,4 +42,8 @@ GridView自带回弹效果
 
 用`  physics: NeverScrollableScrollPhysics(),`禁用GridView的回弹效果
 
-# 
+# 分类页面开发
+
+## 2020/7/6
+
+1. 完成分类页面后端接口调试
