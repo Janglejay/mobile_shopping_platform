@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mobile_shopping_platform/pages/index_page.dart';
 import 'package:mobile_shopping_platform/provide/brand_provide.dart';
+import 'package:mobile_shopping_platform/provide/goods_list_provide.dart';
 import 'package:provider/provider.dart';
 
 main() => runApp(MyApp());
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
       child: MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (context) => BrandProvide()),
+          ChangeNotifierProvider(create: (context) => GoodsListProvide()),
         ],
         child: MaterialApp(
           title: "ForU Shop",

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:mobile_shopping_platform/config/service_url.dart';
 import 'package:mobile_shopping_platform/convert/goods_model.dart';
-import 'package:mobile_shopping_platform/service/http_service.dart';
+import 'package:mobile_shopping_platform/provide/goods_list_provide.dart';
+import 'package:provider/provider.dart';
 
 class GoodsList extends StatefulWidget {
   @override
@@ -10,30 +10,28 @@ class GoodsList extends StatefulWidget {
 }
 
 class _GoodsListState extends State<GoodsList> {
-  List<Goods> goodsList = [];
-
   @override
   void initState() {
     super.initState();
-    _getGoodsList(1, 1, 1);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: ScreenUtil().setWidth(570),
-      height: ScreenUtil().setHeight(960),
-      child: ListView.builder(
-        itemCount: goodsList.length,
-        itemBuilder: (context, index) {
-          return _myListItem(index);
-        },
-      ),
-    );
+    return Consumer<GoodsListProvide>(builder: (context, gp, child) {
+      return Container(
+        width: ScreenUtil().setWidth(570),
+        height: ScreenUtil().setHeight(960),
+        child: ListView.builder(
+            itemCount: gp.goodsList.length,
+            itemBuilder: (context, index) {
+              return _myListItem(index, gp.goodsList);
+            }),
+      );
+    });
   }
 
   //组合成一个子项
-  Widget _myListItem(int index) {
+  Widget _myListItem(int index, List<Goods> gl) {
     return InkWell(
       onTap: () {},
       child: Container(
@@ -44,9 +42,9 @@ class _GoodsListState extends State<GoodsList> {
                 Border(bottom: BorderSide(color: Colors.black12, width: 1))),
         child: Row(
           children: <Widget>[
-            _goodsImage(index),
+            _goodsImage(index, gl),
             Column(
-              children: <Widget>[_goodsName(index), _goodPrice(index)],
+              children: <Widget>[_goodsName(index, gl), _goodPrice(index, gl)],
             )
           ],
         ),
@@ -54,32 +52,21 @@ class _GoodsListState extends State<GoodsList> {
     );
   }
 
-  _getGoodsList(int categoryId, int brandId, int page) async {
-    var params = {"categoryId": categoryId, "brandId": brandId, "page": page};
-    await postRequest(GETBANDGOODS, data: params).then((value) {
-      var goodModel = GoodsListModel.fromJson(value);
-      var list = goodModel.goods;
-      setState(() {
-        goodsList = list;
-      });
-    });
-  }
-
 //图片区域
-  Widget _goodsImage(index) {
+  Widget _goodsImage(index, List<Goods> gl) {
     return Container(
       width: ScreenUtil().setWidth(200),
-      child: Image.network(goodsList[index].imageUrl),
+      child: Image.network(gl[index].imageUrl),
     );
   }
 
   //商品名称
-  Widget _goodsName(index) {
+  Widget _goodsName(index, List<Goods> gl) {
     return Container(
       width: ScreenUtil().setWidth(360),
       padding: EdgeInsets.all(5),
       child: Text(
-        goodsList[index].name,
+        gl[index].name,
         maxLines: 2,
         overflow: TextOverflow.ellipsis, //省略号
         style: TextStyle(fontSize: ScreenUtil().setSp(28)),
@@ -88,20 +75,20 @@ class _GoodsListState extends State<GoodsList> {
   }
 
   //商品价格
-  Widget _goodPrice(index) {
+  Widget _goodPrice(index, List<Goods> gl) {
     return Container(
       margin: EdgeInsets.only(top: 20.0),
       width: ScreenUtil().setWidth(360),
       child: Row(
         children: <Widget>[
           Text(
-            "价格：￥${goodsList[index].mallPrice}",
+            "价格：￥${gl[index].mallPrice}",
             style: TextStyle(
                 color: Colors.red[600], fontSize: ScreenUtil().setSp(30)),
           ),
           //删除线样式
           Text(
-            "￥${goodsList[index].price}",
+            "￥${gl[index].price}",
             style: TextStyle(
                 color: Colors.black26, decoration: TextDecoration.lineThrough),
           ),

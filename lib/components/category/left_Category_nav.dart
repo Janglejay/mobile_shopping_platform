@@ -3,7 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mobile_shopping_platform/config/service_url.dart';
 import 'package:mobile_shopping_platform/convert/brand_model.dart';
 import 'package:mobile_shopping_platform/convert/category_model.dart';
+import 'package:mobile_shopping_platform/convert/goods_model.dart';
 import 'package:mobile_shopping_platform/provide/brand_provide.dart';
+import 'package:mobile_shopping_platform/provide/goods_list_provide.dart';
 import 'package:mobile_shopping_platform/service/http_service.dart';
 import 'package:provider/provider.dart';
 
@@ -49,6 +51,7 @@ class _LeftCategoryNavState extends State<LeftCategoryNav> {
           clickIndex = index;
         });
         _getBrandsList(list[index].categoryId);
+        _getGoodsList(list[index].categoryId);
       },
       child: Container(
         height: ScreenUtil().setHeight(150),
@@ -73,6 +76,7 @@ class _LeftCategoryNavState extends State<LeftCategoryNav> {
       });
       //第一次进入的时候将默认的第一分类的品牌显示出来
       _getBrandsList(data.categories[0].categoryId);
+      _getGoodsList(data.categories[0].categoryId);
       return data;
     });
   }
@@ -87,4 +91,27 @@ class _LeftCategoryNavState extends State<LeftCategoryNav> {
       return data.brands;
     });
   }
+
+//一个分类下的所有物品
+  _getGoodsList(int categoryId) async {
+    var params = {"categoryId": categoryId};
+    await postRequest(GETALLGOODS, data: params).then((value) {
+      var goodModel = GoodsListModel.fromJson(value);
+      var list = goodModel.goods;
+      GoodsListProvide gp =
+          Provider.of<GoodsListProvide>(context, listen: false);
+      gp.goodsList = list;
+    });
+  }
+
+//通过点击品牌获得的
+  // _getGoodsList(int categoryId, int brandId, int page) async {
+  //   var params = {"categoryId": categoryId, "brandId": brandId, "page": page};
+  //   await postRequest(GETBANDGOODS, data: params).then((value) {
+  //     var goodModel = GoodsListModel.fromJson(value);
+  //     var list = goodModel.goods;
+  //     GoodsListProvide gp = Provider.of<GoodsListProvide>(context);
+  //     gp.goodsList = list;
+  //   });
+  // }
 }
