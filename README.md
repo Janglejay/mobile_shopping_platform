@@ -1,6 +1,20 @@
 # mobile_shopping_platform
 
-基于Flutter开发的移动购物平台
+基于`Flutter`开发的移动购物平台
+
+# 项目技术栈：
+
+`flutter v1.17.4`、`Dio v3.0.9`、`flutter_swiper v1.1.6`、`flutter_screenUtil v2.1.0`、`url_launcher v5.4.11`、`flutter_easyrefresh v2.1.1`、`fluttertoast v5.0.1`、`shared_preferences v0.5.8`、`fluro: v1.6.3`
+
+# 项目演示
+
+首页效果图：https://s1.ax1x.com/2020/07/11/U1JGZQ.gif
+
+分类页效果图：https://s1.ax1x.com/2020/07/11/U1GbvT.gif
+
+购物车页面效果:https://s1.ax1x.com/2020/07/11/U1JeIA.gif
+
+<figure class="third">     <img src="https://s1.ax1x.com/2020/07/11/U1JGZQ.gif"  width="260">     <img src="https://s1.ax1x.com/2020/07/11/U1GbvT.gif"  width="260">     <img src="https://s1.ax1x.com/2020/07/11/U1JeIA.gif"  width="260"> </figure>
 
 # 首页开发
 
@@ -98,6 +112,8 @@ handler编写
 6. 完成购买按钮
 
 # 购物车页面开发
+## 2020/7/11
+
 1. 点击添加到购物车功能实现
 2. 建立购物车的数据模型。利于维护
 3. 改写购物城的Provide，与数据模型建立关联
@@ -110,5 +126,15 @@ handler编写
 10. 购物车增加删除功能完成
 11. 完善详情页跳转和结算功能
 12. 添加购物车按钮上方的显示数字小图标(气泡效果，stack上再加stack)
+
 ### 修复bug:总是多加载一页
 在brand导航栏点击刷新页面的时候要page++
+# 购物车页面开发
+## 2020/7/11
+
+1. 会员中心布局
+2. 个人头像布局完成
+
+# 项目完成
+
+本项目仍会持续更新。

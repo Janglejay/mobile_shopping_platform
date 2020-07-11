@@ -15,7 +15,7 @@ class _IndexPageState extends State<IndexPage> {
     BottomNavigationBarItem(icon: Icon(Icons.search), title: Text("分类")),
     BottomNavigationBarItem(
         icon: Icon(Icons.shopping_cart), title: Text("购物车")),
-    BottomNavigationBarItem(icon: Icon(Icons.person_pin), title: Text("会员中心"))
+    BottomNavigationBarItem(icon: Icon(Icons.person_pin), title: Text("个人中心"))
   ];
   final List<Widget> tabBodies = [
     HomePage(),
