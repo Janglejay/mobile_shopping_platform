@@ -7,6 +7,7 @@ import 'package:mobile_shopping_platform/convert/goods_model.dart';
 import 'package:mobile_shopping_platform/provide/brand_provide.dart';
 import 'package:mobile_shopping_platform/provide/goods_list_provide.dart';
 import 'package:mobile_shopping_platform/service/http_service.dart';
+import 'package:mobile_shopping_platform/util/application.dart';
 import 'package:provider/provider.dart';
 
 class GoodsList extends StatefulWidget {
@@ -16,6 +17,7 @@ class GoodsList extends StatefulWidget {
 
 class _GoodsListState extends State<GoodsList> {
   EasyRefreshController _controller = EasyRefreshController();
+  var scorllController = new ScrollController();
   @override
   void initState() {
     super.initState();
@@ -25,6 +27,16 @@ class _GoodsListState extends State<GoodsList> {
   Widget build(BuildContext context) {
     return Consumer2<GoodsListProvide, BrandProvide>(
         builder: (context, gp, bp, child) {
+      try {
+        if (bp.page == 1) {
+          //将列表放在最上面
+          //jump到最上面
+          //double值
+          scorllController.jumpTo(0.0);
+        }
+      } catch (e) {
+        print('第一次进入页面要catch');
+      }
       //利用Expanded高度溢出bug
       if (gp.goodsList.length == 0) {
         return Text("暂时没有数据");
@@ -34,10 +46,14 @@ class _GoodsListState extends State<GoodsList> {
             width: ScreenUtil().setWidth(570),
             // height: ScreenUtil().setHeight(1000),
             child: EasyRefresh(
+                firstRefresh: true,
                 controller: _controller,
                 enableControlFinishLoad: true,
                 // firstRefresh: true,
                 child: ListView.builder(
+
+                    //将控制器加到这里
+                    controller: scorllController,
                     itemCount: gp.goodsList.length,
                     itemBuilder: (context, index) {
                       return _myListItem(index, gp.goodsList);
@@ -78,7 +94,10 @@ class _GoodsListState extends State<GoodsList> {
   //组合成一个子项
   Widget _myListItem(int index, List<Goods> gl) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        Application.router
+            .navigateTo(context, "/detail?id=${gl[index].goodsId}");
+      },
       child: Container(
         padding: EdgeInsets.only(top: 5.0, bottom: 5.0),
         decoration: BoxDecoration(

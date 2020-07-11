@@ -69,3 +69,27 @@ GridView自带回弹效果
 利用Expanded修复溢出bug
 
 ### 修复bug:点击全部类别控制台报错问题
+
+## 2020/7/11
+1. 利用`scorllController`来使得切换品牌能回到开始状态
+```dart
+  try {
+        if (bp.page == 1) {
+          //将列表放在最上面
+          //jump到最上面
+          //double值
+          scorllController.jumpTo(0.0);
+        }
+      } catch (e) {
+        print('第一次进入页面要catch');
+      }
+```
+2. 使用第三方组件`fluro: v1.6.3`管理全局路由
+main中初始化
+handler编写
+总体配置 根路径，路由规则
+路由静态化
+注册到顶层 在app build中，app中注册
+
+### 修复bug:总是多加载一页
+在brand导航栏点击刷新页面的时候要page++

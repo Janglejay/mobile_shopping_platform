@@ -1,4 +1,4 @@
-const IP = "192.168.1.101";
+const IP = "192.168.1.100";
 const _homePageUrl = "http://${IP}:8000/homepage";
 const _categoryPageUrl = "http://${IP}:8000/category";
 

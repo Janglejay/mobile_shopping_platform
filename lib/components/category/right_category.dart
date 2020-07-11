@@ -69,7 +69,9 @@ class _RightCategoryState extends State<RightCategory> {
       var list = goodModel.goods;
       GoodsListProvide gp =
           Provider.of<GoodsListProvide>(context, listen: false);
+      BrandProvide bp = Provider.of<BrandProvide>(context, listen: false);
       gp.goodsList = list;
+      bp.page++;
     });
   }
 
