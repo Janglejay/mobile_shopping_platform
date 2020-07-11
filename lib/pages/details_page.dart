@@ -1,16 +1,43 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_shopping_platform/components/detailspage/detail_top.dart';
+import 'package:mobile_shopping_platform/provide/goods_details_provide.dart';
+import 'package:provider/provider.dart';
 
 class DetailsPage extends StatelessWidget {
-  final String goodsId;
+  final int goodsId;
   DetailsPage(this.goodsId);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Container(
-          child: Text("商品ID${goodsId}"),
+      appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
+        title: Text("商品详细页"),
       ),
+      body: FutureBuilder(
+          future: _getGoodsDetail(context),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return Container(
+                child: Column(
+                  children: <Widget>[DetailTop()],
+                ),
+              );
+            } else {
+              return Text("暂无信息");
+            }
+          }),
     );
+  }
+
+  Future _getGoodsDetail(BuildContext context) async {
+    GoodsDetailProvide gdp =
+        Provider.of<GoodsDetailProvide>(context, listen: false);
+    await gdp.getGoodsDetail(goodsId);
+    return "完成加载";
   }
 }

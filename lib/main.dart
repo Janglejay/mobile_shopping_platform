@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mobile_shopping_platform/pages/index_page.dart';
 import 'package:mobile_shopping_platform/provide/brand_provide.dart';
+import 'package:mobile_shopping_platform/provide/goods_details_provide.dart';
 import 'package:mobile_shopping_platform/provide/goods_list_provide.dart';
 import 'package:mobile_shopping_platform/util/application.dart';
 import 'package:mobile_shopping_platform/util/routes.dart';
@@ -31,6 +32,7 @@ class MyApp extends StatelessWidget {
         providers: [
           ChangeNotifierProvider(create: (context) => BrandProvide()),
           ChangeNotifierProvider(create: (context) => GoodsListProvide()),
+          ChangeNotifierProvider(create: (context) => GoodsDetailProvide())
         ],
         child: MaterialApp(
           //注册路由
