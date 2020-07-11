@@ -36,6 +36,7 @@ dependencies:
   provider: ^4.0.5+1
   fluttertoast: ^5.0.1
   fluro: ^1.6.3
+  shared_preferences: ^0.5.8
 
 dev_dependencies:
   flutter_test:
