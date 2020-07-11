@@ -14,7 +14,7 @@
 
 购物车页面效果:https://s1.ax1x.com/2020/07/11/U1JeIA.gif
 
-<figure class="third">     <img src="https://s1.ax1x.com/2020/07/11/U1JGZQ.gif"  width="260">     <img src="https://s1.ax1x.com/2020/07/11/U1GbvT.gif"  width="260">     <img src="https://s1.ax1x.com/2020/07/11/U1JeIA.gif"  width="260"> </figure>
+<figure class="third">     <img src="https://s1.ax1x.com/2020/07/11/U1JGZQ.gif"  width="220">     <img src="https://s1.ax1x.com/2020/07/11/U1GbvT.gif"  width="220">     <img src="https://s1.ax1x.com/2020/07/11/U1JeIA.gif"  width="220"> </figure>
 
 # 首页开发
 
