@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_shopping_platform/pages/cart_page.dart';
-import 'package:mobile_shopping_platform/test/test_shared_preferences.dart';
 import 'package:mobile_shopping_platform/pages/category_page.dart';
 import 'package:mobile_shopping_platform/pages/home_page.dart';
 import 'package:mobile_shopping_platform/pages/member_page.dart';

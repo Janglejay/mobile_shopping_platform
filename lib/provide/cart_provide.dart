@@ -62,6 +62,10 @@ class CartProvide with ChangeNotifier {
     cartString = "[]";
     cartModelList = [];
     // print("清空完成");
+    // getCartInfo();
+    priceSum = 0.0;
+    goodsCount = 0;
+    isAllCheck = false;
     notifyListeners();
   }
 
@@ -70,9 +74,15 @@ class CartProvide with ChangeNotifier {
     cartString = preferences.getString("cartInfo");
     // print("getcartINfo  ====${cartString}");
     cartModelList = [];
-    if (null == cartModelList) {
+
+    if ("[]" == cartString) {
+      print("=======im empty()=========");
+      priceSum = 0.0;
+      goodsCount = 0;
+      isAllCheck = false;
       cartModelList = [];
     } else {
+      print("=======nnotnotnotntoto empty()=========");
       List<Map> tempList = (json.decode(cartString.toString()) as List).cast();
       priceSum = 0.0;
       goodsCount = 0;

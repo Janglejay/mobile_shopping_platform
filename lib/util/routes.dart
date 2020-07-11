@@ -5,6 +5,7 @@ import 'package:mobile_shopping_platform/util/router_handler.dart';
 class Routes {
   static const String root = '/';
   static const String detailsPage = '/detail';
+  static const String cartPage = '/cart';
   static void configureRoutes(Router router) {
     //找不到路由
     router.notFoundHandler =
@@ -12,5 +13,6 @@ class Routes {
       print("路由没找到");
     });
     router.define(detailsPage, handler: detailsHandler);
+    router.define(cartPage, handler: cartHandler);
   }
 }

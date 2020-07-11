@@ -27,6 +27,7 @@ class CartBottom extends StatelessWidget {
   Widget _selectAll(_) {
     CartProvide cp = Provider.of<CartProvide>(_, listen: false);
     bool isAllCheck = cp.isAllCheck;
+    List list = cp.cartModelList;
     return Container(
       child: Row(
         children: <Widget>[
@@ -34,6 +35,9 @@ class CartBottom extends StatelessWidget {
             value: isAllCheck,
             activeColor: Colors.red[600],
             onChanged: (value) {
+              if (list.length == 0) {
+                return;
+              }
               CartProvide cp = Provider.of<CartProvide>(_, listen: false);
               cp.changeAllCheck(value);
             },
@@ -96,7 +100,10 @@ class CartBottom extends StatelessWidget {
       width: ScreenUtil().setWidth(160),
       padding: EdgeInsets.only(left: 10),
       child: InkWell(
-        onTap: () {},
+        onTap: () {
+          CartProvide cp = Provider.of<CartProvide>(context, listen: false);
+          cp.removeCart();
+        },
         child: Container(
           padding: EdgeInsets.all(10.0),
           alignment: Alignment.center,

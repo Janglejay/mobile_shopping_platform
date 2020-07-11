@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mobile_shopping_platform/convert/goodsdetail_model.dart';
 import 'package:mobile_shopping_platform/provide/cart_provide.dart';
 import 'package:mobile_shopping_platform/provide/goods_details_provide.dart';
+import 'package:mobile_shopping_platform/util/application.dart';
 import 'package:provider/provider.dart';
 
 class DetailBottom extends StatelessWidget {
@@ -57,8 +58,7 @@ class DetailBottom extends StatelessWidget {
           ),
           InkWell(
             onTap: () {
-              CartProvide cp = Provider.of<CartProvide>(context, listen: false);
-              cp.removeCart();
+              Application.router.navigateTo(context, "/cart");
             },
             child: Container(
               width: ScreenUtil().setWidth(320),
