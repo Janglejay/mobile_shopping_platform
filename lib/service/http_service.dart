@@ -10,6 +10,7 @@ Future getRequest(url, {Map args}) async {
       //get用queryParameters
       response = await dio.get(url, queryParameters: args);
     }
+    // print(response.data);
     return response.data;
   } catch (e) {
     return print(e);

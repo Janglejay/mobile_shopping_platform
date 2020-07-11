@@ -53,7 +53,7 @@ class DetailTop extends StatelessWidget {
       child: Text(
         description,
         style:
-            TextStyle(fontSize: ScreenUtil().setSp(20), color: Colors.black12),
+            TextStyle(fontSize: ScreenUtil().setSp(30), color: Colors.black38),
       ),
     );
   }
@@ -61,8 +61,10 @@ class DetailTop extends StatelessWidget {
   //商品价格
   Widget _goodPrice(GoodsDetail goods) {
     return Container(
-      margin: EdgeInsets.only(top: 20.0),
-      width: ScreenUtil().setWidth(360),
+      alignment: Alignment.bottomLeft,
+      margin: EdgeInsets.only(top: 10.0),
+      padding: EdgeInsets.only(left: 15.0),
+      width: ScreenUtil().setWidth(740),
       child: Row(
         children: <Widget>[
           Text(

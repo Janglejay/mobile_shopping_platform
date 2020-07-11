@@ -24,8 +24,8 @@ class GoodsDetail {
   String description;
   String name;
   String imageUrl;
-  int mallPrice;
-  int price;
+  double mallPrice;
+  double price;
 
   GoodsDetail(
       {this.goodsId,

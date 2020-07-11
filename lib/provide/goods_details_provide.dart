@@ -7,8 +7,9 @@ class GoodsDetailProvide with ChangeNotifier {
   GoodsDetail goodsDetail = null;
 
   //获取数据
-  getGoodsDetail(int goodsId) {
-    getRequest("${GETGOODSDETAIL}/${goodsId}").then((value) {
+  getGoodsDetail(int goodsId) async {
+    await getRequest("${GETGOODSDETAIL}/${goodsId}").then((value) {
+      // print("value--${value}");
       var goodsDetailModel = GoodsDetailModel.fromJson(value);
       goodsDetail = goodsDetailModel.goods;
       notifyListeners();

@@ -27,14 +27,14 @@ class DetailsPage extends StatelessWidget {
                 children: <Widget>[
                   Container(
                     child: ListView(
-                      children: <Widget>[DetailTop(), DetailBottom()],
+                      children: <Widget>[DetailTop()],
                     ),
                   ),
                   //定位组件
                   Positioned(
                     bottom: 0,
                     left: 0,
-                    child: Text('测试'),
+                    child: DetailBottom(),
                   ),
                 ],
               );

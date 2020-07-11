@@ -62,7 +62,7 @@ class _GoodsListState extends State<GoodsList> {
                   var cid = bp.brandsList[bp.clickIndex].categoryId;
                   var bid = bp.brandsList[bp.clickIndex].brandId;
                   var page = bp.page;
-                  print("page==============${page}");
+
                   Map params = {
                     "categoryId": cid,
                     "brandId": bid,
@@ -73,7 +73,7 @@ class _GoodsListState extends State<GoodsList> {
                     List<Goods> list = goodsList.goods;
                     gp.goodsList.addAll(list);
                     bp.page = bp.page + 1;
-                    print("length==============${list.length}");
+
                     if (list.length == 0) {
                       FlutterToast.showToast(
                           gravity: ToastGravity.CENTER,
