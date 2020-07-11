@@ -10,7 +10,7 @@ class DetailBottom extends StatelessWidget {
   Widget build(BuildContext context) {
     GoodsDetailProvide gdp =
         Provider.of<GoodsDetailProvide>(context, listen: false);
-    CartProvide cp = Provider.of<CartProvide>(context, listen: false);
+
     GoodsDetail goodsDetail = gdp.goodsDetail;
     var goodsId = goodsDetail.goodsId;
     var name = goodsDetail.name;
@@ -39,6 +39,8 @@ class DetailBottom extends StatelessWidget {
           ),
           InkWell(
             onTap: () async {
+              print("dian yong ? ==== ${goodsId}");
+              CartProvide cp = Provider.of<CartProvide>(context, listen: false);
               await cp.save(goodsId, name, count, price, imageUrl);
             },
             child: Container(
@@ -55,6 +57,7 @@ class DetailBottom extends StatelessWidget {
           ),
           InkWell(
             onTap: () {
+              CartProvide cp = Provider.of<CartProvide>(context, listen: false);
               cp.removeCart();
             },
             child: Container(

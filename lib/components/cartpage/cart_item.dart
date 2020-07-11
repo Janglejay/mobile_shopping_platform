@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mobile_shopping_platform/components/cartpage/cart_count.dart';
 import 'package:mobile_shopping_platform/convert/cart_model.dart';
+import 'package:mobile_shopping_platform/provide/cart_provide.dart';
+import 'package:provider/provider.dart';
 
 class CartItem extends StatelessWidget {
   final CartModel item;
@@ -15,7 +17,7 @@ class CartItem extends StatelessWidget {
           border: Border(bottom: BorderSide(width: 1, color: Colors.black12))),
       child: Row(
         children: <Widget>[
-          _cartCheckItem(),
+          _cartCheckItem(context),
           _goodsImage(),
           _goodsName(),
           _goodsPrice()
@@ -25,10 +27,10 @@ class CartItem extends StatelessWidget {
   }
 
   //复选按钮
-  Widget _cartCheckItem() {
+  Widget _cartCheckItem(BuildContext context) {
     return Container(
       child: Checkbox(
-        value: true,
+        value: item.isCheck,
         activeColor: Colors.red[600],
         onChanged: (bool val) {},
       ),
@@ -72,15 +74,21 @@ class CartItem extends StatelessWidget {
             child: Text('￥${item.price}'),
             margin: EdgeInsets.only(bottom: 15.0),
           ),
-          Container(
-            child: InkWell(
-              onTap: () {},
-              child: Icon(
-                Icons.delete_forever,
-                color: Colors.red[600],
-                size: 30,
-              ),
-            ),
+          Consumer<CartProvide>(
+            builder: (context, cp, child) {
+              return Container(
+                child: InkWell(
+                  onTap: () {
+                    cp.deleteOneGoods(item.goodsId);
+                  },
+                  child: Icon(
+                    Icons.delete_forever,
+                    color: Colors.red[600],
+                    size: 30,
+                  ),
+                ),
+              );
+            },
           ),
         ],
       ),

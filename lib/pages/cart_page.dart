@@ -8,7 +8,8 @@ import 'package:provider/provider.dart';
 class CartPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    CartProvide cp = Provider.of<CartProvide>(context);
+    CartProvide cp = Provider.of<CartProvide>(context, listen: false);
+
     return Scaffold(
       appBar: AppBar(
         title: Text('购物车'),
@@ -20,10 +21,15 @@ class CartPage extends StatelessWidget {
             List<CartModel> cartList = cp.cartModelList;
             return Stack(
               children: <Widget>[
-                ListView.builder(
-                  itemCount: cartList.length,
-                  itemBuilder: (context, index) {
-                    return CartItem(cartList[index]);
+                Consumer<CartProvide>(
+                  builder: (context, cp, child) {
+                    cartList = cp.cartModelList;
+                    return ListView.builder(
+                      itemCount: cartList.length,
+                      itemBuilder: (context, index) {
+                        return CartItem(cartList[index]);
+                      },
+                    );
                   },
                 ),
                 Positioned(
@@ -42,7 +48,8 @@ class CartPage extends StatelessWidget {
   }
 
   Future<String> _getCartInfo(BuildContext context) async {
-    CartProvide cp = Provider.of<CartProvide>(context);
+    print("kai shi huo qu gou wu che xin xi");
+    CartProvide cp = Provider.of<CartProvide>(context, listen: false);
     await cp.getCartInfo();
     return 'end';
   }

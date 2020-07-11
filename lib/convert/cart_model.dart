@@ -4,8 +4,15 @@ class CartModel {
   int count;
   double price;
   String imageUrl;
+  bool isCheck;
 
-  CartModel({this.goodsId, this.name, this.count, this.price, this.imageUrl});
+  CartModel(
+      {this.goodsId,
+      this.name,
+      this.count,
+      this.price,
+      this.imageUrl,
+      this.isCheck});
 
   factory CartModel.fromJson(Map<String, dynamic> json) {
     var goodsId = json['goodsId'];
@@ -13,12 +20,15 @@ class CartModel {
     var count = json['count'];
     var price = json['price'];
     var imageUrl = json['imageUrl'];
+    var isCheck = json['isCheck'];
     return CartModel(
-        goodsId: goodsId,
-        name: name,
-        count: count,
-        price: price,
-        imageUrl: imageUrl);
+      goodsId: goodsId,
+      name: name,
+      count: count,
+      price: price,
+      imageUrl: imageUrl,
+      isCheck: isCheck,
+    );
   }
 
   Map<String, dynamic> toJson() {
@@ -28,6 +38,7 @@ class CartModel {
     data['count'] = this.count;
     data['price'] = this.price;
     data['imageUrl'] = this.imageUrl;
+    data['isCheck'] = this.isCheck;
     return data;
   }
 }
