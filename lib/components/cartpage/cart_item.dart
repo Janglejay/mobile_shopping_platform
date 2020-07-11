@@ -15,13 +15,17 @@ class CartItem extends StatelessWidget {
       padding: EdgeInsets.fromLTRB(5.0, 10.0, 5.0, 10.0),
       decoration: BoxDecoration(
           border: Border(bottom: BorderSide(width: 1, color: Colors.black12))),
-      child: Row(
-        children: <Widget>[
-          _cartCheckItem(context),
-          _goodsImage(),
-          _goodsName(),
-          _goodsPrice()
-        ],
+      child: Consumer<CartProvide>(
+        builder: (context, value, child) {
+          return Row(
+            children: <Widget>[
+              _cartCheckItem(context),
+              _goodsImage(),
+              _goodsName(),
+              _goodsPrice()
+            ],
+          );
+        },
       ),
     );
   }
@@ -32,7 +36,11 @@ class CartItem extends StatelessWidget {
       child: Checkbox(
         value: item.isCheck,
         activeColor: Colors.red[600],
-        onChanged: (bool val) {},
+        onChanged: (bool val) {
+          item.isCheck = val;
+          CartProvide cp = Provider.of<CartProvide>(context, listen: false);
+          cp.changeCheckState(item);
+        },
       ),
     );
   }

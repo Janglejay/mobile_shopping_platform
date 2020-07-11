@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mobile_shopping_platform/provide/cart_provide.dart';
+import 'package:provider/provider.dart';
 
 class CartBottom extends StatelessWidget {
   @override
@@ -7,21 +9,34 @@ class CartBottom extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(5.0),
       color: Colors.white12,
-      child: Row(
-        children: <Widget>[_selectAll(), _allPrice(), _goButton()],
+      child: Consumer<CartProvide>(
+        builder: (context, value, child) {
+          return Row(
+            children: <Widget>[
+              _selectAll(context),
+              _allPrice(context),
+              _goButton(context)
+            ],
+          );
+        },
       ),
     );
   }
 
   //全选按钮
-  Widget _selectAll() {
+  Widget _selectAll(_) {
+    CartProvide cp = Provider.of<CartProvide>(_, listen: false);
+    bool isAllCheck = cp.isAllCheck;
     return Container(
       child: Row(
         children: <Widget>[
           Checkbox(
-            value: true,
+            value: isAllCheck,
             activeColor: Colors.red[600],
-            onChanged: (value) {},
+            onChanged: (value) {
+              CartProvide cp = Provider.of<CartProvide>(_, listen: false);
+              cp.changeAllCheck(value);
+            },
           ),
           Text("全选")
         ],
@@ -30,7 +45,9 @@ class CartBottom extends StatelessWidget {
   }
 
   //合计区域
-  Widget _allPrice() {
+  Widget _allPrice(context) {
+    CartProvide cp = Provider.of<CartProvide>(context);
+    double priceSum = cp.priceSum;
     return Container(
       width: ScreenUtil().setWidth(430),
       // alignment: Alignment,
@@ -50,7 +67,7 @@ class CartBottom extends StatelessWidget {
                 alignment: Alignment.centerLeft,
                 width: ScreenUtil().setWidth(150),
                 child: Text(
-                  '￥1992',
+                  '￥${priceSum}',
                   style: TextStyle(
                       fontSize: ScreenUtil().setSp(28), color: Colors.red[600]),
                 ),
@@ -72,7 +89,9 @@ class CartBottom extends StatelessWidget {
   }
 
   //结算按钮
-  Widget _goButton() {
+  Widget _goButton(context) {
+    CartProvide cp = Provider.of<CartProvide>(context, listen: false);
+    int count = cp.goodsCount;
     return Container(
       width: ScreenUtil().setWidth(160),
       padding: EdgeInsets.only(left: 10),
@@ -86,7 +105,7 @@ class CartBottom extends StatelessWidget {
             borderRadius: BorderRadius.circular(3.0),
           ),
           child: Text(
-            "结算(6)",
+            "结算(${count})",
             style: TextStyle(color: Colors.white),
           ),
         ),
