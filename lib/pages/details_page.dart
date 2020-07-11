@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_shopping_platform/components/detailspage/detail_top.dart';
+import 'package:mobile_shopping_platform/components/detailspage/details_bottom.dart';
 import 'package:mobile_shopping_platform/provide/goods_details_provide.dart';
 import 'package:provider/provider.dart';
 
@@ -22,10 +23,20 @@ class DetailsPage extends StatelessWidget {
           future: _getGoodsDetail(context),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              return Container(
-                child: Column(
-                  children: <Widget>[DetailTop()],
-                ),
+              return Stack(
+                children: <Widget>[
+                  Container(
+                    child: ListView(
+                      children: <Widget>[DetailTop(), DetailBottom()],
+                    ),
+                  ),
+                  //定位组件
+                  Positioned(
+                    bottom: 0,
+                    left: 0,
+                    child: Text('测试'),
+                  ),
+                ],
               );
             } else {
               return Text("暂无信息");
