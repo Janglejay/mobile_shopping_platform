@@ -25,18 +25,48 @@ class DetailBottom extends StatelessWidget {
       height: ScreenUtil().setHeight(80),
       child: Row(
         children: <Widget>[
-          InkWell(
-            onTap: () {},
-            child: Container(
-              width: ScreenUtil().setWidth(110),
-              height: ScreenUtil().setHeight(80),
-              alignment: Alignment.center,
-              child: Icon(
-                Icons.shopping_cart,
-                size: 35,
-                color: Colors.red[600],
+          Stack(
+            children: <Widget>[
+              InkWell(
+                onTap: () {
+                  Application.router.navigateTo(context, "/cart");
+                },
+                child: Container(
+                  width: ScreenUtil().setWidth(110),
+                  height: ScreenUtil().setHeight(80),
+                  alignment: Alignment.center,
+                  child: Icon(
+                    Icons.shopping_cart,
+                    size: 35,
+                    color: Colors.red[600],
+                  ),
+                ),
               ),
-            ),
+              //气泡是变化的
+              Consumer<CartProvide>(
+                builder: (context, cp, child) {
+                  int goodsCount = cp.goodsCount;
+                  return Positioned(
+                    top: 0,
+                    right: 10,
+                    child: Container(
+                      padding: EdgeInsets.fromLTRB(6, 3, 6, 3),
+                      decoration: BoxDecoration(
+                        color: Colors.red[600],
+                        border: Border.all(width: 2, color: Colors.white),
+                        borderRadius: BorderRadius.circular(12.0),
+                      ),
+                      child: Text(
+                        '${cp.goodsCount}',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: ScreenUtil().setSp(22)),
+                      ),
+                    ),
+                  );
+                },
+              )
+            ],
           ),
           InkWell(
             onTap: () async {
