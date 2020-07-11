@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class CartPage extends StatefulWidget {
+class TestSharedPreferences extends StatefulWidget {
   @override
   _CartPageState createState() => _CartPageState();
 }
 
-class _CartPageState extends State<CartPage> {
+class _CartPageState extends State<TestSharedPreferences> {
   List<String> testList = [];
   @override
   Widget build(BuildContext context) {

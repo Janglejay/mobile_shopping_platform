@@ -82,7 +82,6 @@ class _LeftCategoryNavState extends State<LeftCategoryNav> {
   }
 
   Future _getBrandsList(int id) async {
-    print("brandList=================");
     Map params = {"categoryId": id};
     await postRequest(GETBRANDS, data: params).then((value) {
       var data = Brand.fromJson(value);

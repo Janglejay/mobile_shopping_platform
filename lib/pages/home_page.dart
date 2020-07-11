@@ -82,7 +82,7 @@ class _HomePageState extends State<HomePage>
                 ),
                 onLoad: () async {
                   var data = {"page": page};
-                  print("=================${page}");
+                  // print("=================${page}");
                   await getRequest(GETHOTGOODS, args: data).then((value) {
                     var data = value['hotgoods'];
                     ImageList imageList = ImageList.fromJson(data);
@@ -92,7 +92,7 @@ class _HomePageState extends State<HomePage>
                       page++;
                     });
                   });
-                  _controller.finishLoad(success: true, noMore: page >= 3);
+                  _controller.finishLoad(success: true, noMore: page >= 10);
                 },
               );
             } else {

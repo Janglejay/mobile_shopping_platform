@@ -35,7 +35,7 @@ class _GoodsListState extends State<GoodsList> {
           scorllController.jumpTo(0.0);
         }
       } catch (e) {
-        print('第一次进入页面要catch');
+        print('不catch会报错');
       }
       //利用Expanded高度溢出bug
       if (gp.goodsList.length == 0) {

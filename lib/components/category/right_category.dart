@@ -41,6 +41,10 @@ class _RightCategoryState extends State<RightCategory> {
     bool isClick = clickIndex == bp.clickIndex;
     return InkWell(
       onTap: () {
+        //重复点击自己没有效果
+        if (clickIndex == bp.clickIndex) {
+          return;
+        }
         _click(clickIndex);
         if (clickIndex != 0) {
           _getGoodsList(item.categoryId, item.brandId, bp.page);

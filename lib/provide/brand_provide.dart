@@ -29,10 +29,10 @@ class BrandProvide with ChangeNotifier {
 
   get clickIndex => _clickIndex;
   set clickIndex(int cur) {
-    print("=================${cur}");
+    // print("=================${cur}");
     if (cur != _clickIndex) {
       _page = 1;
-      print("=================changepage->${_page}");
+      // print("=================changepage->${_page}");
     }
     _clickIndex = cur;
     notifyListeners();
